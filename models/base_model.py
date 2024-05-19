@@ -35,7 +35,7 @@ class BaseModel:
                 else:
                     self.__dict__[key] = value
         else:
-            models.storage.new(self)
+            models.strge.new(self)
 
     def __str__(self):
         """Return the print/str representation of the BaseModel instance."""
@@ -47,8 +47,8 @@ class BaseModel:
             the current datetime"""
 
         self.updated_at = datetime.now()
-        # models.storage.new(self)
-        models.storage.save()
+        # models.strge.new(self)
+        models.strge.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values

@@ -8,7 +8,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-from models import storage
+from models import strge
 import cmd
 import os
 import re
@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             print(eval(tokens[0])().id)
-            storage.save()
+            strge.save()
 
     def do_clear(self, args: str) -> None:
         """Clear the screen"""
@@ -117,10 +117,10 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = "{}.{}".format(tokens[0], tokens[1])
-            if key not in storage.all():
+            if key not in strge.all():
                 print("** no instance found **")
             else:
-                print(storage.all()[key])
+                print(strge.all()[key])
 
     def do_destroy(self, arg: str) -> None:
         """Deletes an instance based on the class name and id"""
@@ -134,29 +134,29 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = "{}.{}".format(tokens[0], tokens[1])
-            if key not in storage.all():
+            if key not in strge.all():
                 print("** no instance found **")
             else:
-                del storage.all()[key]
-                storage.save()
+                del strge.all()[key]
+                strge.save()
 
     def do_all(self, arg: str) -> None:
         """Prints all string representation of all instances"""
 
         tokens = tokenize(arg)
         if arg == "":
-            print([str(value) for value in storage.all().values()])
+            print([str(value) for value in strge.all().values()])
         elif tokens[0] not in HBNBCommand.CLASSNAMES:
             print("** class doesn't exist **")
         else:
-            temp = [str(v) for k, v in storage.all().items()
+            temp = [str(v) for k, v in strge.all().items()
                     if tokens[0] in k]
             print(temp)
 
     def do_update(self, arg: str) -> None:
         """ Updates the class"""
         tokens = tokenize(arg)
-        objson = storage.all()
+        objson = strge.all()
         if arg == "":
             # print(tokens)
             print("** class name missing **")
@@ -205,7 +205,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     obj.__dict__[k] = v
 
-        storage.save()
+        strge.save()
 
     def do_count(self, arg):
         """counts"""
@@ -214,7 +214,7 @@ class HBNBCommand(cmd.Cmd):
         # set counter
         count = 0
         # get all object keys
-        object_keys = storage.all().keys()
+        object_keys = strge.all().keys()
         for key in object_keys:
             if tokens[0] in key:
                 count += 1
