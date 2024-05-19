@@ -8,19 +8,17 @@ import models
 
 class BaseModel:
     """The BaseModel class that defines all common attributes
-            and methods of other classes
+            and methods.
     """
 
     def __init__(self, *args, **kwargs):
-        """The initialization function
-            Args:
-                    created_at: datetime - assign with the current
-                    datetime when an instance is created
-                    updated_at: datetime - assign with the current datetime
-                    when an instance is created and it will be updated
-                    every time you change your object
-                    id: string - assign with an uuid when an instance
-                    is created
+        """
+            Initializes the instance.
+
+            Attributes:
+                created_at (datetime): Current datetime when the instance is created.
+                updated_at (datetime): Current datetime when the instance is created, updated whenever the object is changed.
+                id (str): Unique identifier assigned when the instance is created.
         """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
