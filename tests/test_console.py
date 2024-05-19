@@ -84,13 +84,6 @@ class TestHBNBCommand(unittest.TestCase):
             s = 'Handles EOF\n'
             self.assertEqual(s, f.getvalue())
 
-    def test_help_emptyline(self):
-        """Tests empty line"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("help emptyline")
-            s = '*** No help on emptyline\n'
-            self.assertEqual(s, f.getvalue())
-
     def test_help_default(self):
         """default"""
         with patch('sys.stdout', new=StringIO()) as f:

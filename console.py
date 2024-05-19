@@ -15,7 +15,7 @@ import re
 
 
 def tokenize(arg: str) -> list:
-    """ Splits a string into tokens delimited by space
+    """ Splits a string into tks delimited by space
 
     Args:
         arg (string): strings to be splitted
@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
     """The class HBNB that builds a console"""
 
     prompt = "(hbnb) "
-    CLASSNAMES = {
+    CLSNMES = {
         "BaseModel",
         "User",
         "State",
@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
     def default(self, arg):
         """Default method"""
 
-        func_dict = {
+        fdict = {
             "all": self.do_all,
             "show": self.do_show,
             "destroy": self.do_destroy,
@@ -57,31 +57,31 @@ class HBNBCommand(cmd.Cmd):
             "update": self.do_update
         }
 
-        tokens = tokenize(arg)
-        for key in func_dict.keys():
+        tks = tokenize(arg)
+        for key in fdict.keys():
             # checking for commands to call
-            if key == tokens[1]:
+            if key == tks[1]:
                 # for if args is parentheses eg("something")
-                if tokens[2] != "" and len(tokens) < 6:
-                    # print(tokens)
-                    striped_arg = tokens[2].replace('"', '')
-                    args = "{} {}".format(tokens[0], striped_arg)
-                    return func_dict[tokens[1]](args)
-                elif len(tokens) > 6:
+                if tks[2] != "" and len(tks) < 6:
+                    # print(tks)
+                    sparg = tks[2].replace('"', '')
+                    args = "{} {}".format(tks[0], sparg)
+                    return fdict[tks[1]](args)
+                elif len(tks) > 6:
                     # for update version 1
-                    # print(tokens)
-                    arg1 = tokens[2].replace('"', '')
-                    arg2 = tokens[4].replace('"', '')
-                    arg3 = tokens[6].replace('"', '')
-                    args = "{} {} {} {}".format(tokens[0], arg1, arg2, arg3)
+                    # print(tks)
+                    ar1 = tks[2].replace('"', '')
+                    ar2 = tks[4].replace('"', '')
+                    ar3 = tks[6].replace('"', '')
+                    args = "{} {} {} {}".format(tks[0], ar1, ar2, ar3)
                     # print(args)
-                    return func_dict[tokens[1]](args)
+                    return fdict[tks[1]](args)
 
                 else:
-                    # print(tokens)
-                    return func_dict[tokens[1]](tokens[0])
+                    # print(tks)
+                    return fdict[tks[1]](tks[0])
 
-        # print(tokens)
+        # print(tks)
 
         print("*** Unknown syntax: {}".format(arg))
         return False
@@ -89,13 +89,13 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg: str) -> None:
         """Creates a new instance"""
 
-        tokens = tokenize(arg)
+        tks = tokenize(arg)
         if arg == "":
             print("** class name missing **")
-        elif tokens[0] not in HBNBCommand.CLASSNAMES:
+        elif tks[0] not in HBNBCommand.CLSNMES:
             print("** class doesn't exist **")
         else:
-            print(eval(tokens[0])().id)
+            print(eval(tks[0])().id)
             strge.save()
 
     def do_clear(self, args: str) -> None:
@@ -108,15 +108,15 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg: str) -> None:
         """prints the string representation of an instance"""
 
-        tokens = tokenize(arg)
+        tks = tokenize(arg)
         if arg == "":
             print("** class name missing **")
-        elif tokens[0] not in HBNBCommand.CLASSNAMES:
+        elif tks[0] not in HBNBCommand.CLSNMES:
             print("** class doesn't exist **")
-        elif len(tokens) < 2:
+        elif len(tks) < 2:
             print("** instance id missing **")
         else:
-            key = "{}.{}".format(tokens[0], tokens[1])
+            key = "{}.{}".format(tks[0], tks[1])
             if key not in strge.all():
                 print("** no instance found **")
             else:
@@ -125,15 +125,15 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg: str) -> None:
         """Deletes an instance based on the class name and id"""
 
-        tokens = tokenize(arg)
+        tks = tokenize(arg)
         if arg == "":
             print("** class name missing **")
-        elif tokens[0] not in HBNBCommand.CLASSNAMES:
+        elif tks[0] not in HBNBCommand.CLSNMES:
             print("** class doesn't exist **")
-        elif len(tokens) < 2:
+        elif len(tks) < 2:
             print("** instance id missing **")
         else:
-            key = "{}.{}".format(tokens[0], tokens[1])
+            key = "{}.{}".format(tks[0], tks[1])
             if key not in strge.all():
                 print("** no instance found **")
             else:
@@ -143,65 +143,65 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg: str) -> None:
         """Prints all string representation of all instances"""
 
-        tokens = tokenize(arg)
+        tks = tokenize(arg)
         if arg == "":
             print([str(value) for value in strge.all().values()])
-        elif tokens[0] not in HBNBCommand.CLASSNAMES:
+        elif tks[0] not in HBNBCommand.CLSNMES:
             print("** class doesn't exist **")
         else:
             temp = [str(v) for k, v in strge.all().items()
-                    if tokens[0] in k]
+                    if tks[0] in k]
             print(temp)
 
     def do_update(self, arg: str) -> None:
         """ Updates the class"""
-        tokens = tokenize(arg)
+        tks = tokenize(arg)
         objson = strge.all()
         if arg == "":
-            # print(tokens)
+            # print(tks)
             print("** class name missing **")
             return False
-        elif tokens[0] not in HBNBCommand.CLASSNAMES:
-            # print(tokens)
+        elif tks[0] not in HBNBCommand.CLSNMES:
+            # print(tks)
             print("** class doesn't exist **")
             return False
-        elif len(tokens) < 2:
-            # print(tokens)
+        elif len(tks) < 2:
+            # print(tks)
             print("** instance id missing **")
             return False
 
-        elif "{}.{}".format(tokens[0], tokens[1]) not in objson.keys():
-            # print(tokens)
+        elif "{}.{}".format(tks[0], tks[1]) not in objson.keys():
+            # print(tks)
             print("** no instance found **")
             return False
-        elif len(tokens) < 3:
-            # print(tokens)
+        elif len(tks) < 3:
+            # print(tks)
             print("** attribute name missing **")
             return False
-        elif len(tokens) == 3:
+        elif len(tks) == 3:
             try:
-                type(eval(tokens[2])) != dict
+                type(eval(tks[2])) != dict
             except NameError:
-                # print(tokens)
+                # print(tks)
                 print("** value missing **")
                 return False
 
-        if len(tokens) > 3:
-            obj = objson["{}.{}".format(tokens[0], tokens[1])]
-            if tokens[2] in obj.__class__.__dict__.keys():
+        if len(tks) > 3:
+            obj = objson["{}.{}".format(tks[0], tks[1])]
+            if tks[2] in obj.__class__.__dict__.keys():
                 # get the attribute value type for typecast
-                val_type = type(obj.__class__.__dict__[tokens[2]])
-                obj.__dict__[tokens[2]] = val_type(tokens[3])
+                vtype = type(obj.__class__.__dict__[tks[2]])
+                obj.__dict__[tks[2]] = vtype(tks[3])
             else:
-                obj.__dict__[tokens[2]] = tokens[3]
+                obj.__dict__[tks[2]] = tks[3]
 
-        elif type(eval(tokens[2])) == dict:
-            obj = objson["{}.{}".format(tokens[0], tokens[1])]
-            for k, v in eval(tokens[2]).items():
+        elif type(eval(tks[2])) == dict:
+            obj = objson["{}.{}".format(tks[0], tks[1])]
+            for k, v in eval(tks[2]).items():
                 if (k in obj.__class__.__dict__.keys() and
                         type(obj.__class__.__dict__[k]) in [str, int, float]):
-                    val_type = type(obj.__class__.__dict__[k])
-                    obj.__dict__[k] = val_type(v)
+                    vtype = type(obj.__class__.__dict__[k])
+                    obj.__dict__[k] = vtype(v)
                 else:
                     obj.__dict__[k] = v
 
@@ -210,25 +210,21 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, arg):
         """counts"""
 
-        tokens = tokenize(arg)
+        tk = tokenize(arg)
         # set counter
-        count = 0
+        ct = 0
         # get all object keys
         object_keys = strge.all().keys()
         for key in object_keys:
-            if tokens[0] in key:
-                count += 1
-        print(count)
+            if tk[0] in key:
+                ct += 1
+        print(ct)
 
     def do_EOF(self, arg):
         """Handles EOF"""
 
         raise systemExit
 
-    def emptyline(self):
-        """This doesnt do anything when the no command is passed"""
-
-        pass
 
 
 if __name__ == '__main__':
