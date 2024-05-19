@@ -226,6 +226,5 @@ class HBNBCommand(cmd.Cmd):
         raise systemExit
 
 
-
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
