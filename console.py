@@ -214,8 +214,8 @@ class HBNBCommand(cmd.Cmd):
         # set counter
         ct = 0
         # get all object keys
-        object_keys = strge.all().keys()
-        for key in object_keys:
+        objk = strge.all().keys()
+        for key in objk:
             if tk[0] in key:
                 ct += 1
         print(ct)
