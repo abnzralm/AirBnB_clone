@@ -4,8 +4,12 @@
 from console import HBNBCommand
 from models.engine.file_storage import FileStorage
 import unittest
+import datetime
 from unittest.mock import patch
+import sys
 from io import StringIO
+import re
+import os
 
 
 class TestHBNBCommand(unittest.TestCase):
@@ -78,6 +82,13 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help EOF")
             s = 'Handles EOF\n'
+            self.assertEqual(s, f.getvalue())
+
+    def test_help_emptyline(self):
+        """Tests empty line"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help emptyline")
+            s = '*** No help on emptyline\n'
             self.assertEqual(s, f.getvalue())
 
     def test_help_default(self):
