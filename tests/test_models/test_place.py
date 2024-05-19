@@ -109,11 +109,10 @@ class TestPlace_Has_attr_BaseModel(unittest.TestCase):
     def test_place_has_updated_at_attr(self):
         p1 = Place()
         self.assertTrue(p1.updated_at)
-        
+
     def test_place_has__str__attr(self):
         p1 = Place()
         self.assertTrue(p1.__str__)
-
 
 
 if __name__ == "__main__":

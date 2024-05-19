@@ -9,8 +9,7 @@ from models.base_model import BaseModel
 
 
 class TestReview_Object_instance(unittest.TestCase):
-
-    """ Test review class object instance 
+    """ Test review class object instance
     """
 
     def setUp(self):
@@ -76,7 +75,7 @@ class TestReview_Has_attr_basemodel(unittest.TestCase):
         self.assertTrue(r1.updated_at)
 
     def test_review_has___str__(self):
-        r1 =Review()
+        r1 = Review()
         self.assertTrue(r1.__str__)
 
     def test_review_has_save_attr(self):

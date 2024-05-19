@@ -8,6 +8,7 @@ import unittest
 from models.city import City
 from models.base_model import BaseModel
 
+
 class Test_City_object_instance(unittest.TestCase):
     """ Test City class object instance"""
 
@@ -50,6 +51,7 @@ class Test_City_object_instance(unittest.TestCase):
         c1 = City()
         self.assertEqual(c1.name, "")
 
+
 class TestCity_Has_Attr_basemodel(unittest.TestCase):
     """
             Test City for basemodel attributes
@@ -84,4 +86,4 @@ class TestCity_Has_Attr_basemodel(unittest.TestCase):
 
 
 if __name__ == "__main__":
-   unittest.main()
+    unittest.main()

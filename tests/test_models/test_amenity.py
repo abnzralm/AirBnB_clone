@@ -5,7 +5,7 @@
 
 from datetime import datetime, date
 import unittest
-from  models.amenity import Amenity
+from models.amenity import Amenity
 from models.base_model import BaseModel
 
 
@@ -85,11 +85,8 @@ class TestAmenity_Has_attr_basemodel(unittest.TestCase):
         self.assertTrue(al.to_dict)
 
     def test_Amenity_can_take_kwargs(self):
-        a2 = Amenity(name="Al-Areef")
-        self.assertEqual(a2.name, "Al-Areef")
-
-
-
+        a2 = Amenity(name="Shiferaw Desalegn")
+        self.assertEqual(a2.name, "Shiferaw Desalegn")
 
 
 if __name__ == "__main__":
