@@ -156,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg: str) -> None:
         """ Updates the class"""
         tokens = tokenize(arg)
-        objso = storage.all()
+        objson = storage.all()
         if arg == "":
             # print(tokens)
             print("** class name missing **")
@@ -170,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return False
 
-        elif "{}.{}".format(tokens[0], tokens[1]) not in objso.keys():
+        elif "{}.{}".format(tokens[0], tokens[1]) not in objson.keys():
             # print(tokens)
             print("** no instance found **")
             return False
@@ -187,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
         if len(tokens) > 3:
-            obj = objso["{}.{}".format(tokens[0], tokens[1])]
+            obj = objson["{}.{}".format(tokens[0], tokens[1])]
             if tokens[2] in obj.__class__.__dict__.keys():
                 # get the attribute value type for typecast
                 val_type = type(obj.__class__.__dict__[tokens[2]])
@@ -196,7 +196,7 @@ class HBNBCommand(cmd.Cmd):
                 obj.__dict__[tokens[2]] = tokens[3]
 
         elif type(eval(tokens[2])) == dict:
-            obj = objso["{}.{}".format(tokens[0], tokens[1])]
+            obj = objson["{}.{}".format(tokens[0], tokens[1])]
             for k, v in eval(tokens[2]).items():
                 if (k in obj.__class__.__dict__.keys() and
                         type(obj.__class__.__dict__[k]) in [str, int, float]):

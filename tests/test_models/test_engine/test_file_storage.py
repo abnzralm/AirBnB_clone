@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """ 
-unittests for ... file_storage.py.
+unittests for models/engine/file_storage.py.
 Unittest classes:
     TestFileStorage_instantiation
     TestFileStorage_methods
@@ -32,7 +32,7 @@ class TestFileStorage_instantiation(unittest.TestCase):
             FileStorage(None)
 
     def test_FileStorage_file_path_is_private_str(self):
-        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+        self.assertEqual(str, type(FileStorage._FileStorage__fp))
 
     def testFileStorage_objects_is_private_dict(self):
         self.assertEqual(dict, type(FileStorage._FileStorage__ob))

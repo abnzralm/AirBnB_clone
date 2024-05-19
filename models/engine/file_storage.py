@@ -13,14 +13,14 @@ from models.review import Review
 class FileStorage:
     """
         Serializes instances to a JSON file and
-        Deserializes JSON file to instances.
+        deserializes JSON file to instances.
 
         Attributes:
-            __fpaz (str): Path to the JSON file.
+            __fp (str): Path to the JSON file.
             __ob (dict): Stores all objects.
     """
 
-    __fpaz = "file.json"
+    __fp = "file.json"
     __ob = {}
 
     def all(self):
@@ -36,26 +36,26 @@ class FileStorage:
 
     def save(self):
         """ serializes __ob to the JSON file """
-        path = FileStorage.__fpaz
+        path = FileStorage.__fp
 
-        new_obj = {k: FileStorage.__ob[k].to_dict(
+        new_oj = {k: FileStorage.__ob[k].to_dict(
         ) for k in FileStorage.__ob.keys()}
 
         with open(path, "w") as file:
-            json.dump(new_obj, file)
+            json.dump(new_oj, file)
 
     def reload(self):
-        """Deserialize the JSON file __fpaz to __ob, if it exists."""
+        """Deserialize the JSON file __fp to __ob, if it exists."""
 
-        path = FileStorage.__fpaz
+        path = FileStorage.__fp
 
         try:
             with open(path) as file:
-                objso = json.load(file)
-                for obj in objso.values():
-                    class_name = obj['__class__']
+                objson = json.load(file)
+                for obj in objson.values():
+                    cls_nme = obj['__class__']
                     del obj['__class__']
-                    self.new(eval(class_name)(**obj))
+                    self.new(eval(cls_nme)(**obj))
 
         except FileNotFoundError:
             return
