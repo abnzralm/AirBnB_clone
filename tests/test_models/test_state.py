@@ -41,8 +41,8 @@ class TestState_Object_instance(unittest.TestCase):
 
     def test_state_name_attr(self):
         s1 = State()
-        s1.name = "Lagos"
-        self.assertEqual(s1.name, "Lagos")
+        s1.name = "Addis Ababa"
+        self.assertEqual(s1.name, "Addis Ababa")
 
     def test_state_name(self):
         s1 = State()
@@ -55,7 +55,7 @@ class TestState_Has_attr_basemodel(unittest.TestCase):
     """
 
     def setUp(self):
-        print("Testing if State has the attributes of BaseModel")
+        print("Testing if State has the attrs of parent")
 
     def test_state_has_id_attr(self):
         s1 = State()
@@ -70,12 +70,12 @@ class TestState_Has_attr_basemodel(unittest.TestCase):
         self.assertTrue(s1.updated_at)
 
     def test_state_can_take_kwargs(self):
-        s2 = State(name="Al-Areef")
-        self.assertEqual(s2.name, "Al-Areef")
+        s2 = State(name="Shiferaw")
+        self.assertEqual(s2.name, "Shiferaw")
 
     def test_state_can_take_multiple_kwargs(self):
-        s2 = State(name="Al-Areef", partner="Ayobami")
-        self.assertEqual(s2.partner, "Ayobami")
+        s2 = State(name="Shiferaw", partner="Kidus")
+        self.assertEqual(s2.partner, "Kidus")
 
     def test_state_object_str_representation(self):
         s1 = State()

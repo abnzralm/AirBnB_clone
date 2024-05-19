@@ -52,13 +52,13 @@ class TestUser_Object_instance(unittest.TestCase):
 
     def test_user_firstname_attr(self):
         u1 = User()
-        u1.first_name = "Ayobami"
-        self.assertEqual(u1.first_name, "Ayobami")
+        u1.first_name = "Kidus"
+        self.assertEqual(u1.first_name, "Kidus")
 
     def test_user_lastname_attr(self):
         u1 = User()
-        u1.last_name = "Al-Areef"
-        self.assertEqual(u1.last_name, "Al-Areef")
+        u1.last_name = "Shiferaw"
+        self.assertEqual(u1.last_name, "Shiferaw")
 
     def test_user_password_attr(self):
         u1 = User()
@@ -77,7 +77,7 @@ class TestUser_Has_attr_basemodel(unittest.TestCase):
     """
 
     def setUp(self):
-        print("Testing if User has the attributes of BaseModel")
+        print("Testing if User has the attrs of parent")
 
     def test_user_has_id_attr(self):
         u1 = User()
@@ -92,12 +92,12 @@ class TestUser_Has_attr_basemodel(unittest.TestCase):
         self.assertTrue(u1.updated_at)
 
     def test_user_can_take_kwargs(self):
-        u2 = User(name="Al-Areef")
-        self.assertEqual(u2.name, "Al-Areef")
+        u2 = User(name="Shiferaw")
+        self.assertEqual(u2.name, "Shiferaw")
 
     def test_user_can_take_multiple_kwargs(self):
-        u2 = User(name="Al-Areef", partner="Ayobami")
-        self.assertEqual(u2.partner, "Ayobami")
+        u2 = User(name="Shiferaw", partner="Kidus")
+        self.assertEqual(u2.partner, "Kidus")
 
     def test_user_object_str_representation(self):
         u1 = User()

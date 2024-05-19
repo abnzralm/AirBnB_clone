@@ -19,37 +19,37 @@ class TestAmenity_object_instance(unittest.TestCase):
         print("Testing Amenity Object Instance")
 
     def test_Amenity_is_a_subclass_basemodel(self):
-        a1 = Amenity()
-        self.assertIsInstance(a1, BaseModel)
+        z1 = Amenity()
+        self.assertIsInstance(z1, BaseModel)
 
     def test_Amenity_is_instabce(self):
-        a1 = Amenity()
-        self.assertIsInstance(a1, Amenity)
+        z1 = Amenity()
+        self.assertIsInstance(z1, Amenity)
 
     def test_Amenity_two_ids(self):
-        a1 = Amenity()
-        a2 = Amenity()
-        self.assertNotEqual(a1.id, a2.id)
+        z1 = Amenity()
+        z2 = Amenity()
+        self.assertNotEqual(z1.id, z2.id)
 
     def test_Amenity_three_ids(self):
-        a1 = Amenity()
-        a2 = Amenity()
-        a3 = Amenity()
-        self.assertNotEqual(a3.id, a1.id)
+        z1 = Amenity()
+        z2 = Amenity()
+        z3 = Amenity()
+        self.assertNotEqual(z3.id, z1.id)
 
     def test_Amenity_created_time(self):
-        a1 = Amenity()
-        a2 = Amenity()
-        self.assertNotEqual(a1.created_at, a2.created_at)
+        z1 = Amenity()
+        z2 = Amenity()
+        self.assertNotEqual(z1.created_at, z2.created_at)
 
     def test_Amenity_updated_time(self):
-        a1 = Amenity()
-        a2 = Amenity()
-        self.assertNotEqual(a1.updated_at, a2.updated_at)
+        z1 = Amenity()
+        z2 = Amenity()
+        self.assertNotEqual(z1.updated_at, z2.updated_at)
 
     def test_Amenity_nameid_default_value(self):
-        a1 = Amenity()
-        self.assertEqual(a1.name, "")
+        z1 = Amenity()
+        self.assertEqual(z1.name, "")
 
 
 class TestAmenity_Has_attr_basemodel(unittest.TestCase):
@@ -58,35 +58,35 @@ class TestAmenity_Has_attr_basemodel(unittest.TestCase):
     """
 
     def setUp(self):
-        print("Testing if Amenity has the attributes of BaseModel")
+        print("Testing if Amenity has the attrs of parent")
 
     def test_Amenity_has_id_attr(self):
-        a1 = Amenity()
-        self.assertTrue(a1.id)
+        z1 = Amenity()
+        self.assertTrue(z1.id)
 
     def test_Amenity_has_created_at_attr(self):
-        a1 = Amenity()
-        self.assertTrue(a1.created_at)
+        z1 = Amenity()
+        self.assertTrue(z1.created_at)
 
     def test_Amenity_has_updated_at_attr(self):
-        a1 = Amenity()
-        self.assertTrue(a1.created_at)
+        z1 = Amenity()
+        self.assertTrue(z1.created_at)
 
     def test_Amenity_has__str___attr(self):
-        a1 = Amenity()
-        self.assertTrue(a1.__str__)
+        z1 = Amenity()
+        self.assertTrue(z1.__str__)
 
     def test_Amenity_has_save_attr(self):
-        a1 = Amenity()
-        self.assertTrue(a1.save)
+        z1 = Amenity()
+        self.assertTrue(z1.save)
 
     def test_Amenity_has_to_dict_attr(self):
         al = Amenity()
         self.assertTrue(al.to_dict)
 
     def test_Amenity_can_take_kwargs(self):
-        a2 = Amenity(name="Shiferaw Desalegn")
-        self.assertEqual(a2.name, "Shiferaw Desalegn")
+        z2 = Amenity(name="Shiferaw")
+        self.assertEqual(z2.name, "Shiferaw")
 
 
 if __name__ == "__main__":
