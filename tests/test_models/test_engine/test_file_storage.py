@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """ 
-unittests for models/engine/file_storage.py.
+unittests for ... file_storage.py.
 Unittest classes:
     TestFileStorage_instantiation
     TestFileStorage_methods
@@ -35,7 +35,7 @@ class TestFileStorage_instantiation(unittest.TestCase):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
 
     def testFileStorage_objects_is_private_dict(self):
-        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
+        self.assertEqual(dict, type(FileStorage._FileStorage__ob))
 
     def test_storage_initializes(self):
         self.assertEqual(type(models.storage), FileStorage)
@@ -61,7 +61,7 @@ class TestFileStorage_methods(unittest.TestCase):
             os.rename("tmp", "file.json")
         except IOError:
             pass
-        FileStorage._FileStorage__objects = {}
+        FileStorage._FileStorage__ob = {}
 
     def test_all(self):
         self.assertEqual(dict, type(models.storage.all()))
@@ -152,7 +152,7 @@ class TestFileStorage_methods(unittest.TestCase):
         models.storage.new(rv)
         models.storage.save()
         models.storage.reload()
-        objs = FileStorage._FileStorage__objects
+        objs = FileStorage._FileStorage__ob
         self.assertIn("BaseModel." + bm.id, objs)
         self.assertIn("User." + us.id, objs)
         self.assertIn("State." + st.id, objs)

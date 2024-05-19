@@ -11,48 +11,48 @@ from models.review import Review
 
 
 class FileStorage:
-    """The FileStorage class that serializes instances to
-        a JSON file and deserializes JSON file to instances
-        Args:
-            __file_path: Private class attribute
-             string - path to the JSON file
-             __objects: private class attribute
-             dictionary - empty but will store all objects
-        """
+    """
+        Serializes instances to a JSON file and
+        Deserializes JSON file to instances.
 
-    __file_path = "file.json"
-    __objects = {}
+        Attributes:
+            __fpaz (str): Path to the JSON file.
+            __ob (dict): Stores all objects.
+    """
+
+    __fpaz = "file.json"
+    __ob = {}
 
     def all(self):
-        """ returns the dictionary __objects """
+        """ returns the dictionary __ob """
 
-        return FileStorage.__objects
+        return FileStorage.__ob
 
     def new(self, obj):
-        """sets in __objects the obj with key <obj class name>.id"""
+        """sets in __ob the obj with key <obj class name>.id"""
 
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        FileStorage.__ob[key] = obj
 
     def save(self):
-        """ serializes __objects to the JSON file """
-        path = FileStorage.__file_path
+        """ serializes __ob to the JSON file """
+        path = FileStorage.__fpaz
 
-        new_obj = {k: FileStorage.__objects[k].to_dict(
-        ) for k in FileStorage.__objects.keys()}
+        new_obj = {k: FileStorage.__ob[k].to_dict(
+        ) for k in FileStorage.__ob.keys()}
 
         with open(path, "w") as file:
             json.dump(new_obj, file)
 
     def reload(self):
-        """Deserialize the JSON file __file_path to __objects, if it exists."""
+        """Deserialize the JSON file __fpaz to __ob, if it exists."""
 
-        path = FileStorage.__file_path
+        path = FileStorage.__fpaz
 
         try:
             with open(path) as file:
-                object_json = json.load(file)
-                for obj in object_json.values():
+                objso = json.load(file)
+                for obj in objso.values():
                     class_name = obj['__class__']
                     del obj['__class__']
                     self.new(eval(class_name)(**obj))
