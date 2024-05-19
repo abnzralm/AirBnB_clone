@@ -65,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
                 if tokens[2] != "" and len(tokens) < 6:
                     # print(tokens)
                     striped_arg = tokens[2].replace('"', '')
-                    args = f"{tokens[0]} {striped_arg}"
+                    args = "{} {}".format(tokens[0], striped_arg)
                     return func_dict[tokens[1]](args)
                 elif len(tokens) > 6:
                     # for update version 1
@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                     arg1 = tokens[2].replace('"', '')
                     arg2 = tokens[4].replace('"', '')
                     arg3 = tokens[6].replace('"', '')
-                    args = f"{tokens[0]} {arg1} {arg2} {arg3}"
+                    args = "{} {} {} {}".format(tokens[0], arg1, arg2, arg3)
                     # print(args)
                     return func_dict[tokens[1]](args)
 
@@ -170,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return False
 
-        elif f"{tokens[0]}.{tokens[1]}" not in object_json.keys():
+        elif "{}.{}".format(tokens[0], tokens[1]) not in object_json.keys():
             # print(tokens)
             print("** no instance found **")
             return False
@@ -187,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
         if len(tokens) > 3:
-            obj = object_json[f"{tokens[0]}.{tokens[1]}"]
+            obj = object_json["{}.{}".format(tokens[0], tokens[1])]
             if tokens[2] in obj.__class__.__dict__.keys():
                 # get the attribute value type for typecast
                 val_type = type(obj.__class__.__dict__[tokens[2]])
@@ -196,7 +196,7 @@ class HBNBCommand(cmd.Cmd):
                 obj.__dict__[tokens[2]] = tokens[3]
 
         elif type(eval(tokens[2])) == dict:
-            obj = object_json[f"{tokens[0]}.{tokens[1]}"]
+            obj = object_json["{}.{}".format(tokens[0], tokens[1])]
             for k, v in eval(tokens[2]).items():
                 if (k in obj.__class__.__dict__.keys() and
                         type(obj.__class__.__dict__[k]) in [str, int, float]):
